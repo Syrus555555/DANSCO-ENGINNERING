@@ -437,7 +437,41 @@ nav { animation: fadeIn 0.5s ease-out both; }
 @media (max-width: 900px) {
   nav { padding: 0 24px; }
   .nav-links { display: none; }
-  .hamburger { display: block; margin-left: auto; background: none; border: none; cursor: pointer; }
+  .nav-links.nav-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: var(--nav-h);
+    left: 0; right: 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--rule);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    padding: 8px 0 16px;
+    z-index: 99;
+    animation: fadeIn 0.2s ease-out both;
+  }
+  .nav-links.nav-open li { width: 100%; }
+  .nav-links.nav-open a {
+    padding: 12px 24px !important;
+    border-radius: 0;
+    font-size: 16px;
+  }
+  .nav-links.nav-open .dropdown {
+    position: static;
+    opacity: 1; pointer-events: all; transform: none;
+    box-shadow: none; border: none; border-top: none;
+    background: var(--bg); padding: 4px 0;
+    display: none; /* shown via nav-item hover/tap */
+  }
+  .nav-links.nav-open .nav-item:focus-within .dropdown,
+  .nav-links.nav-open .nav-item:hover .dropdown { display: block; }
+  .nav-links.nav-open .nav-cta {
+    margin: 8px 24px 0 !important;
+    text-align: center !important;
+    border-radius: 3px !important;
+  }
+  .hamburger { display: block; margin-left: auto; background: none; border: none; cursor: pointer; padding: 8px; }
   .section, .section-sm { padding: 56px 24px; }
   .page-header { padding: 56px 24px 48px; }
   .cta-band { flex-direction: column; text-align: center; padding: 48px 24px; }
