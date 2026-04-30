@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Dansco Engineering, LLC</title>
+  <link rel="stylesheet" href="shared.css?v1777554202983" />
+  <style>
+    /* ── ABOUT CONTENT ── */
+    .about-main {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: center; padding: 88px 72px;
+    }
+    .about-img {
+      position: relative; aspect-ratio: 4/3;
+      background: repeating-linear-gradient(-45deg,var(--bg-alt),var(--bg-alt) 10px,var(--bg) 10px,var(--bg) 20px);
+      border-radius: 4px; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-img span {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light);
+    }
+    .about-img img {
+      width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0;
+    }
+    .about-badge {
+      position: absolute; bottom: 0; right: 0;
+      background: var(--brand); color: var(--white);
+      padding: 20px 24px; border-radius: 4px 0 4px 0;
+      z-index: 1;
+    }
+    .about-badge .yr { font-family: 'Barlow Condensed', sans-serif; font-size: 36px; font-weight: 700; line-height: 1; }
+    .about-badge .lbl { font-size: 12px; opacity: 0.8; margin-top: 4px; }
+    .about-body { font-size: 16px; color: var(--text-mid); line-height: 1.75; margin-bottom: 24px; }
+    .about-bullets { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
+    .about-bullets li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text); }
+    .about-bullets li::before {
+      content: ''; flex-shrink: 0; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--brand); margin-top: 8px;
+    }
+
+    /* ── VALUES ── */
+    .values-section { padding: 88px 72px; background: var(--white); }
+    .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .value-card {
+      padding: 36px 32px; border: 1px solid var(--rule); border-radius: 4px;
+      border-top: 3px solid var(--brand);
+    }
+    .value-num {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 32px;
+      font-weight: 700; color: var(--bg-alt); margin-bottom: 12px;
+    }
+    .value-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+    .value-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+    /* ── TEAM ── */
+    #team { padding: 88px 72px; }
+    .team-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+    .team-photo {
+      width: 100%; aspect-ratio: 1/1; max-width: 160px; margin: 0 auto 20px;
+      border-radius: 50%;
+      background: repeating-linear-gradient(45deg,var(--bg-alt),var(--bg-alt) 6px,var(--bg) 6px,var(--bg) 12px);
+      display: flex; align-items: center; justify-content: center;
+      border: 3px solid var(--rule); overflow: hidden;
+    }
+    .team-photo span {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light);
+      text-align: center; padding: 8px;
+    }
+    .team-card { text-align: center; }
+    .team-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 20px; font-weight: 600; color: var(--text); }
+    .team-card .role { font-size: 13px; color: var(--brand); font-weight: 500; margin: 4px 0 10px; }
+    .team-card p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+    .team-divider { border: none; border-top: 1px solid var(--rule); margin-bottom: 52px; }
+
+    /* ── LICENSES ── */
+    .licenses-section { padding: 88px 72px; background: var(--bg-alt); }
+    .licenses-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .states-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+
+    /* ── US MAP ── */
+    .us-map-wrap {
+      background: var(--white); border: 1px solid var(--rule);
+      padding: 28px 24px 20px; position: sticky; top: 132px;
+    }
+    .us-map-wrap .map-label {
+      display: flex; justify-content: space-between; align-items: baseline;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light);
+      padding-bottom: 12px; border-bottom: 1px solid var(--rule); margin-bottom: 16px;
+    }
+    .us-map-wrap .map-readout {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
+      letter-spacing: 0.04em; color: var(--text); font-weight: 600;
+    }
+    .us-map-wrap .map-readout .muted { color: var(--text-light); font-weight: 400; }
+    .us-map-svg { width: 100%; height: auto; display: block; }
+    .us-map-svg .states path {
+      fill: var(--bg-alt); stroke: var(--white); stroke-width: 1.2;
+      transition: fill 0.15s ease; cursor: default;
+    }
+    .us-map-svg .states path.licensed { fill: #d9c8b8; cursor: pointer; }
+    .us-map-svg .states path.licensed:hover,
+    .us-map-svg .states path.licensed.active { fill: var(--accent); }
+    .us-map-svg .states path.hq { fill: var(--brand); stroke: var(--brand-dark); stroke-width: 1.5; cursor: pointer; }
+    .us-map-svg .states path.hq:hover,
+    .us-map-svg .states path.hq.active { fill: var(--brand-dark); }
+    .us-map-legend {
+      display: flex; gap: 20px; flex-wrap: wrap; margin-top: 14px; padding-top: 14px;
+      border-top: 1px solid var(--rule);
+      font-size: 12px; color: var(--text-mid);
+    }
+    .us-map-legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .us-map-legend i {
+      display: inline-block; width: 12px; height: 12px; border: 1px solid var(--rule); flex-shrink: 0;
+    }
+    .state-chip { cursor: pointer; transition: background 0.15s, color 0.15s, border-color 0.15s; }
+    .state-chip.active { background: var(--brand); color: var(--white); border-color: var(--brand); }
+    .state-chip {
+      padding: 6px 14px; border: 1px solid var(--rule); background: var(--white);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--text-mid); border-radius: 2px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .about-main { grid-template-columns: 1fr; padding: 56px 24px; gap: 40px; }
+      .values-section { padding: 56px 24px; }
+      .values-grid { grid-template-columns: 1fr; }
+      #team { padding: 56px 24px; }
+      .team-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+      .licenses-section { padding: 56px 24px; }
+      .licenses-grid { grid-template-columns: 1fr; gap: 40px; }
+      .us-map-wrap { position: static; }
+      .team-divider { margin-bottom: 32px; }
+    }
+    @media (max-width: 600px) {
+      .team-grid { grid-template-columns: 1fr; }
+      .values-grid { grid-template-columns: 1fr; }
+      .about-badge { padding: 14px 18px; }
+      .about-badge .yr { font-size: 28px; }
+      .states-list { gap: 8px; }
+      .state-chip { padding: 5px 10px; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="uploads/logo-1777477161197.jpg" alt="Dansco Engineering, LLC" />
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-item">
+        <a href="services.html">Services ▾</a>
+        <div class="dropdown">
+          <a href="services.html#structural">Structural Engineering</a>
+          <a href="services.html#shoring">Shoring &amp; Formwork Engineering</a>
+          <a href="services.html#truss">Truss Engineering &amp; Repairs</a>
+          <a href="services.html#inspections">Structural Inspections</a>
+        </div>
+      </li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html" class="active">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navLinks">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect y="0" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="7" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="14" width="22" height="2" rx="1" fill="#4a6478"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div class="page-header">
+    <div class="breadcrumb"><a href="index.html">Home</a> / About Us</div>
+    <h1>About Dansco Engineering</h1>
+    <p>Over 37 years of trusted structural engineering expertise — built on precision, responsiveness, and results.</p>
+  </div>
+
+  <!-- ABOUT MAIN -->
+  <div class="about-main">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80&fit=crop" alt="Structural engineering — building under construction" />
+      <div class="about-badge">
+        <div class="yr">1987</div>
+        <div class="lbl">Founded</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Our Story</div>
+      <h2>Built on Precision.<br/>Trusted for Decades.</h2>
+      <p class="about-body">Dansco Engineering, LLC has provided quality structural engineering services since 1987. Founded by Samuel A. Greenberg, P.E., the firm has grown from a Florida-based practice into a nationally licensed engineering consultancy serving contractors, developers, and property owners across more than 30 states.</p>
+      <p class="about-body">We pride ourselves on delivering accurate, code-compliant engineering in a timely manner. Our clients return to us because we make complex engineering straightforward — and because we pick up the phone.</p>
+      <ul class="about-bullets">
+        <li>Licensed professional engineers with decades of combined field experience</li>
+        <li>Fast turnaround on stamped drawings and engineering letters</li>
+        <li>Responsive, personalized service on every project — regardless of size</li>
+        <li>Trusted by general contractors, subcontractors, and developers nationwide</li>
+      </ul>
+      <a href="contact.html" class="btn-primary">Work With Us</a>
+    </div>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values-section">
+    <div class="section-label">How We Work</div>
+    <h2>Our Core Values</h2>
+    <p class="section-intro">Everything we do is guided by a commitment to accuracy, responsiveness, and practical solutions.</p>
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="value-num">01</div>
+        <h3>Accuracy First</h3>
+        <p>Every calculation, drawing, and report we produce is thorough and code-compliant. We don't cut corners — our clients' projects depend on it.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">02</div>
+        <h3>Fast Turnaround</h3>
+        <p>Construction schedules don't wait. We prioritize efficient delivery without sacrificing quality — so your project stays on track.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-num">03</div>
+        <h3>Practical Solutions</h3>
+        <p>We provide engineering that works in the field, not just on paper. Our designs are constructible, cost-conscious, and clearly communicated.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM -->
+  <div id="team" class="section" style="background: var(--bg);">
+    <div class="section-label">Our People</div>
+    <h2>Meet the Team</h2>
+    <p class="section-intro">A team of licensed professionals committed to accuracy, responsiveness, and practical engineering.</p>
+    <hr class="team-divider" />
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-photo"><span>Placeholder 1</span></div>
+        <h3>Samuel A. Greenberg, P.E.</h3>
+        <div class="role">Founder &amp; Principal Engineer</div>
+        <p>Over 37 years of structural engineering experience across residential, commercial, and industrial sectors. Licensed in 30+ states.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span>Placeholder 2</span></div>
+        <h3>Team Member Name</h3>
+        <div class="role">Structural Engineer</div>
+        <p>Placeholder — replace with team member name, title, and bio. Specializes in shoring and formwork design.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><span>Placeholder 3</span></div>
+        <h3>Team Member Name</h3>
+        <div class="role">Project Coordinator</div>
+        <p>Placeholder — replace with team member name, title, and bio. Manages client communications and project scheduling.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LICENSES / SERVICE AREAS -->
+  <div class="licenses-section">
+    <div class="licenses-grid">
+      <div>
+        <div class="section-label">Where We Work</div>
+        <h2>Licensed Nationwide</h2>
+        <p class="section-intro" style="margin-bottom:0;">Dansco Engineering is licensed to practice in more than 30 states, with deep roots in Florida and the Southeast.</p>
+        <div class="states-list" id="statesList">
+          <span class="state-chip" data-state="FL">Florida</span>
+          <span class="state-chip" data-state="GA">Georgia</span>
+          <span class="state-chip" data-state="SC">South Carolina</span>
+          <span class="state-chip" data-state="NC">North Carolina</span>
+          <span class="state-chip" data-state="TN">Tennessee</span>
+          <span class="state-chip" data-state="AL">Alabama</span>
+          <span class="state-chip" data-state="MS">Mississippi</span>
+          <span class="state-chip" data-state="LA">Louisiana</span>
+          <span class="state-chip" data-state="TX">Texas</span>
+          <span class="state-chip" data-state="VA">Virginia</span>
+          <span class="state-chip" data-state="MD">Maryland</span>
+          <span class="state-chip" data-state="PA">Pennsylvania</span>
+          <span class="state-chip" data-state="NY">New York</span>
+          <span class="state-chip" data-state="OH">Ohio</span>
+          <span class="state-chip" data-state="IL">Illinois</span>
+          <span class="state-chip" data-state="MI">Michigan</span>
+          <span class="state-chip" data-state="CO">Colorado</span>
+          <span class="state-chip" data-state="AZ">Arizona</span>
+          <span class="state-chip" data-state="CA">California</span>
+          <span class="state-chip">+ More</span>
+        </div>
+      </div>
+      <div class="us-map-wrap">
+        <div class="map-label">
+          <span>Service Areas</span>
+          <span class="map-readout" id="mapReadout"><span class="muted">Hover a state</span></span>
+        </div>
+        <div id="usMap"></div>
+        <div class="us-map-legend">
+          <span><i style="background:var(--brand);border-color:var(--brand-dark);"></i>Headquarters</span>
+          <span><i style="background:#d9c8b8;border-color:#c8b39e;"></i>Licensed</span>
+          <span><i style="background:var(--bg-alt);"></i>Other</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>Have a project in mind?</h2>
+      <p>Let's talk — we're ready to help.</p>
+    </div>
+    <a href="contact.html" class="btn-white">Contact Us</a>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="uploads/logo-white-transparent.png" alt="Dansco Engineering, LLC" />
+        <p>Providing quality structural engineering solutions since 1987. Licensed in 30+ states, headquartered in Apollo Beach, Florida.</p>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html#structural">Structural Engineering</a></li>
+        <li><a href="services.html#shoring">Shoring &amp; Formwork</a></li>
+        <li><a href="services.html#truss">Truss Engineering</a></li>
+        <li><a href="services.html#inspections">Structural Inspections</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#team">Our Team</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Service Areas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="tel:8136450166">(813) 645-0166</a></li>
+        <li><a href="mailto:info@danscoengineering.com">info@danscoengineering.com</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Dansco+Engineering+Apollo+Beach+FL" target="_blank" rel="noopener">Apollo Beach, FL</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dansco Engineering, LLC. All rights reserved.</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script src="animations.js?v1777554202983"></script>
+  <script src="us-map.js?v2"></script>
+  <script>
+    // ── HAMBURGER MENU ──
+    (function () {
+      var btn = document.getElementById('hamburgerBtn');
+      var links = document.getElementById('navLinks');
+      if (!btn || !links) return;
+
+      btn.addEventListener('click', function () {
+        var isOpen = links.classList.toggle('nav-open');
+        btn.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      // Close when any nav link is clicked (handles SPA-style navigation)
+      links.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          links.classList.remove('nav-open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Close when clicking outside
+      document.addEventListener('click', function (e) {
+        if (!btn.contains(e.target) && !links.contains(e.target)) {
+          links.classList.remove('nav-open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+
+    // ── US MAP ──
+    (function () {
+      var mapHost = document.getElementById('usMap');
+      if (!mapHost || !window.US_MAP_SVG) return;
+      mapHost.innerHTML = window.US_MAP_SVG;
+
+      var LICENSED = ['FL','GA','SC','NC','TN','AL','MS','LA','TX','VA','MD','PA','NY','OH','IL','MI','CO','AZ','CA'];
+      var HQ = 'FL';
+      var paths = mapHost.querySelectorAll('path[data-state]');
+      paths.forEach(function (p) {
+        var s = p.getAttribute('data-state');
+        if (s === HQ) p.classList.add('hq', 'licensed');
+        else if (LICENSED.indexOf(s) > -1) p.classList.add('licensed');
+      });
+
+      var readout = document.getElementById('mapReadout');
+      var chips = document.querySelectorAll('.state-chip[data-state]');
+      var chipMap = {};
+      chips.forEach(function (c) { chipMap[c.getAttribute('data-state')] = c; });
+      var pathMap = {};
+      paths.forEach(function (p) { pathMap[p.getAttribute('data-state')] = p; });
+
+      function setActive(stateCode, name) {
+        paths.forEach(function (p) { p.classList.remove('active'); });
+        chips.forEach(function (c) { c.classList.remove('active'); });
+        if (stateCode && pathMap[stateCode]) pathMap[stateCode].classList.add('active');
+        if (stateCode && chipMap[stateCode]) chipMap[stateCode].classList.add('active');
+        if (name) {
+          var hqTag = stateCode === HQ ? ' <span class="muted">— HQ</span>' : '';
+          readout.innerHTML = name + hqTag;
+        } else {
+          readout.innerHTML = '<span class="muted">Hover a state</span>';
+        }
+      }
+
+      paths.forEach(function (p) {
+        p.addEventListener('mouseenter', function () {
+          setActive(p.getAttribute('data-state'), p.getAttribute('data-name'));
+        });
+        p.addEventListener('mouseleave', function () { setActive(null, null); });
+        // Touch support
+        p.addEventListener('touchstart', function (e) {
+          e.preventDefault();
+          setActive(p.getAttribute('data-state'), p.getAttribute('data-name'));
+        }, { passive: false });
+      });
+
+      chips.forEach(function (c) {
+        c.addEventListener('mouseenter', function () {
+          setActive(c.getAttribute('data-state'), c.textContent.trim());
+        });
+        c.addEventListener('mouseleave', function () { setActive(null, null); });
+      });
+    })();
+  </script>
+</body>
+</html>

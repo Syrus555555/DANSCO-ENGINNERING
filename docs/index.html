@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dansco Engineering, LLC — Structural Engineering</title>
+  <link rel="stylesheet" href="shared.css?v1777554202983" />
+  <style>
+    /* ── HERO ── */
+    #home {
+      margin-top: var(--nav-h);
+      min-height: calc(100vh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .hero-left {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 80px 64px 80px 72px;
+    }
+    .hero-eyebrow {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block; width: 32px; height: 2px; background: var(--accent);
+    }
+    h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(46px, 5vw, 70px); font-weight: 700;
+      line-height: 1.05; color: var(--text); margin-bottom: 28px;
+    }
+    h1 span { color: var(--brand); }
+    .hero-sub {
+      font-size: 18px; font-weight: 300; color: var(--text-mid);
+      line-height: 1.7; max-width: 440px; margin-bottom: 44px;
+    }
+    .hero-buttons { display: flex; align-items: center; gap: 16px; }
+    .hero-stats {
+      margin-top: 60px; padding-top: 36px; border-top: 1px solid var(--rule);
+      display: flex; gap: 48px;
+    }
+    .stat-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 40px; font-weight: 700; color: var(--brand); line-height: 1;
+    }
+    .stat-label { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+    .hero-right {
+      position: relative; background: var(--brand-dark); overflow: hidden;
+    }
+    .hero-img-bg {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(180deg, #2a3a47 0%, #1e2830 100%);
+    }
+    /* Animated SVG building scene */
+    .build-scene { width: 78%; max-width: 480px; }
+    .build-scene .ground {
+      stroke: rgba(255,255,255,0.3); stroke-width: 2;
+      stroke-dasharray: 600; stroke-dashoffset: 600;
+      animation: drawStroke 0.8s ease-out 0.3s forwards;
+    }
+    .build-scene .floor {
+      opacity: 0; transform: translateY(40px); transform-origin: bottom;
+      animation: floorRise 0.7s cubic-bezier(0.22,1,0.36,1) forwards;
+    }
+    .build-scene .floor:nth-of-type(1) { animation-delay: 1.0s; }
+    .build-scene .floor:nth-of-type(2) { animation-delay: 1.5s; }
+    .build-scene .floor:nth-of-type(3) { animation-delay: 2.0s; }
+    .build-scene .floor:nth-of-type(4) { animation-delay: 2.5s; }
+    .build-scene .crane {
+      opacity: 0; transform: translateX(-30px);
+      animation: craneIn 0.8s ease-out 3.0s forwards;
+    }
+    .build-scene .sun {
+      opacity: 0;
+      animation: sunRise 1s ease-out 3.4s forwards;
+      transform-origin: center;
+    }
+    @keyframes drawStroke {
+      to { stroke-dashoffset: 0; }
+    }
+    @keyframes floorRise {
+      0% { opacity: 0; transform: translateY(40px) scaleY(0); }
+      60% { transform: translateY(-4px) scaleY(1.02); }
+      100% { opacity: 1; transform: translateY(0) scaleY(1); }
+    }
+    @keyframes craneIn {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes sunRise {
+      to { opacity: 1; }
+    }
+    .build-scene-label {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      opacity: 0;
+      animation: fadeIn 0.6s ease-out 4s forwards;
+    }
+    .hero-card {
+      position: absolute; bottom: 40px; left: -24px;
+      background: var(--white); padding: 20px 24px; border-radius: 4px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.18); max-width: 230px;
+    }
+    .hero-card-dot {
+      width: 10px; height: 10px; background: var(--accent);
+      border-radius: 50%; margin-bottom: 10px;
+    }
+    .hero-card strong { display: block; font-size: 15px; color: var(--text); margin-bottom: 4px; }
+    .hero-card p { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+
+    /* ── HOME SERVICES ── */
+    .home-services { padding: 88px 72px; background: var(--white); }
+    .services-grid {
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1px; background: var(--rule); border: 1px solid var(--rule);
+      margin-top: 0;
+    }
+    .service-card {
+      background: var(--white); padding: 40px 28px;
+      position: relative; overflow: hidden; transition: background 0.2s;
+    }
+    .service-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 3px; background: var(--brand);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .service-card:hover { background: var(--bg); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 48px; font-weight: 700; color: var(--bg-alt);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .service-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 19px; font-weight: 600; color: var(--text); margin-bottom: 10px;
+    }
+    .service-card p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+    .service-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 18px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--brand); text-decoration: none;
+    }
+    .service-link:hover { color: var(--brand-dark); }
+
+    /* ── HOME ABOUT STRIP ── */
+    .about-strip {
+      display: grid; grid-template-columns: 1fr 1fr; background: var(--bg-alt);
+    }
+    .about-strip-img {
+      min-height: 480px;
+      background: repeating-linear-gradient(-45deg,#e0deda,#e0deda 10px,var(--bg-alt) 10px,var(--bg-alt) 20px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-strip-img span {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light);
+    }
+    .about-strip-content {
+      padding: 80px 64px; display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-strip-content p {
+      font-size: 16px; color: var(--text-mid); line-height: 1.75; margin-bottom: 32px;
+    }
+    .founded-badge {
+      display: inline-flex; align-items: baseline; gap: 10px; margin-bottom: 24px;
+    }
+    .founded-badge .yr {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 56px;
+      font-weight: 700; color: var(--brand); line-height: 1;
+    }
+    .founded-badge .lbl { font-size: 14px; color: var(--text-light); }
+
+    /* ── HOME PROJECTS PREVIEW ── */
+    .projects-preview { padding: 88px 72px; }
+    .preview-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 16px; }
+    .preview-card {
+      background: var(--white); border-radius: 4px; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .preview-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.09); }
+    .preview-card-img {
+      background: repeating-linear-gradient(45deg,var(--bg-alt),var(--bg-alt) 8px,var(--bg) 8px,var(--bg) 16px);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .preview-card-img span {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light);
+    }
+    .preview-card:first-child .preview-card-img { height: 340px; }
+    .preview-card:not(:first-child) .preview-card-img { height: 200px; }
+    .preview-card-info { padding: 18px 20px; }
+    .preview-card-tag {
+      display: inline-block; background: var(--brand); color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 2px; margin-bottom: 8px;
+    }
+    .preview-card-info h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 17px;
+      font-weight: 600; color: var(--text); margin-bottom: 4px;
+    }
+    .preview-card-info p { font-size: 13px; color: var(--text-light); }
+
+    /* ── TESTIMONIALS (Google Reviews) ── */
+    .testimonials-section { padding: 88px 72px; background: var(--brand-dark); }
+    .testimonials-section .section-label { color: rgba(255,255,255,0.45); }
+    .testimonials-section h2 { color: var(--white); margin-bottom: 14px; }
+    .reviews-meta {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .reviews-meta-rating {
+      display: flex; align-items: center; gap: 10px;
+      color: rgba(255,255,255,0.85); font-size: 15px;
+    }
+    .reviews-meta-rating .score {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 32px; font-weight: 700; color: var(--white);
+      line-height: 1;
+    }
+    .reviews-meta-rating .stars { color: #fbbc04; font-size: 18px; letter-spacing: 2px; }
+    .reviews-meta-rating .count { color: rgba(255,255,255,0.55); font-size: 13px; }
+    .reviews-meta a.review-cta {
+      margin-left: auto;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--white);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 10px 18px; border-radius: 3px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .reviews-meta a.review-cta:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
+    .t-card {
+      background: var(--white);
+      border-radius: 8px; padding: 28px 26px;
+      display: flex; flex-direction: column;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .t-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.25); }
+
+    .t-head {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 14px;
+    }
+    .t-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 18px; font-weight: 600; color: var(--white);
+      flex-shrink: 0;
+    }
+    .t-head-info { flex: 1; min-width: 0; }
+    .t-head-info strong {
+      display: block; font-size: 14px; font-weight: 600;
+      color: var(--text); line-height: 1.2;
+    }
+    .t-head-info .t-meta {
+      display: flex; align-items: center; gap: 6px; margin-top: 3px;
+      font-size: 12px; color: var(--text-light);
+    }
+    .t-google-g {
+      width: 14px; height: 14px; flex-shrink: 0;
+    }
+
+    .t-stars {
+      display: flex; gap: 2px; margin-bottom: 10px;
+      color: #fbbc04;
+    }
+    .t-stars svg { width: 16px; height: 16px; }
+    .t-card p {
+      font-size: 14px; font-weight: 400; line-height: 1.65;
+      color: var(--text-mid);
+      flex: 1;
+    }
+    .t-date {
+      margin-top: 16px; padding-top: 14px;
+      border-top: 1px solid var(--border);
+      font-size: 12px; color: var(--text-light);
+    }
+
+    @media (max-width: 900px) {
+      #home { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .hero-left { padding: 56px 24px; }
+      .home-services { padding: 56px 24px; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .about-strip { grid-template-columns: 1fr; }
+      .about-strip-img { min-height: 240px; }
+      .about-strip-content { padding: 48px 24px; }
+      .projects-preview { padding: 56px 24px; }
+      .preview-grid { grid-template-columns: 1fr; }
+      .testimonials-section { padding: 56px 24px; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="uploads/logo-1777477161197.jpg" alt="Dansco Engineering, LLC" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li class="nav-item">
+        <a href="services.html">Services ▾</a>
+        <div class="dropdown">
+          <a href="services.html#structural">Structural Engineering</a>
+          <a href="services.html#shoring">Shoring &amp; Formwork Engineering</a>
+          <a href="services.html#truss">Truss Engineering &amp; Repairs</a>
+          <a href="services.html#inspections">Structural Inspections</a>
+        </div>
+      </li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect y="0" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="7" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="14" width="22" height="2" rx="1" fill="#4a6478"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <div id="home">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Licensed in 30+ States</div>
+      <h1>Precision<br/>Structural<br/><span>Engineering</span><br/>Solutions</h1>
+      <p class="hero-sub">Dansco Engineering, LLC delivers expert structural engineering, shoring &amp; formwork design, truss engineering, and structural inspections — serving contractors nationwide since 1987.</p>
+      <div class="hero-buttons">
+        <a href="contact.html" class="btn-primary">Request a Consultation</a>
+        <a href="projects.html" class="btn-outline">View Our Work</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">37+</div>
+          <div class="stat-label">Years in practice</div>
+        </div>
+        <div>
+          <div class="stat-num">30+</div>
+          <div class="stat-label">States licensed</div>
+        </div>
+        <div>
+          <div class="stat-num">4</div>
+          <div class="stat-label">Core service areas</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-img-bg">
+        <svg class="build-scene" viewBox="0 0 480 320" xmlns="http://www.w3.org/2000/svg">
+          <!-- Sun -->
+          <circle class="sun" cx="380" cy="60" r="28" fill="oklch(0.72 0.13 55)" opacity="0.85"/>
+          <circle class="sun" cx="380" cy="60" r="40" fill="oklch(0.72 0.13 55)" opacity="0.18"/>
+
+          <!-- Crane -->
+          <g class="crane">
+            <rect x="80" y="20" width="6" height="240" fill="rgba(255,255,255,0.5)"/>
+            <rect x="50" y="20" width="120" height="5" fill="rgba(255,255,255,0.5)"/>
+            <line x1="140" y1="25" x2="140" y2="55" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+            <rect x="132" y="55" width="16" height="10" fill="rgba(255,255,255,0.6)"/>
+            <rect x="60" y="14" width="46" height="10" fill="rgba(255,255,255,0.6)"/>
+          </g>
+
+          <!-- Floor 1 (foundation) -->
+          <g class="floor">
+            <rect x="180" y="240" width="220" height="22" fill="#6a8499" opacity="0.9"/>
+            <rect x="180" y="240" width="220" height="3" fill="rgba(255,255,255,0.25)"/>
+          </g>
+          <!-- Floor 2 -->
+          <g class="floor">
+            <rect x="180" y="200" width="220" height="40" fill="#7a94a9"/>
+            <rect x="195" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="225" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="255" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="285" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="315" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="345" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="375" y="212" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+          </g>
+          <!-- Floor 3 -->
+          <g class="floor">
+            <rect x="180" y="160" width="220" height="40" fill="#8aa4b9"/>
+            <rect x="195" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="225" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="255" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="285" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="315" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="345" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="375" y="172" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+          </g>
+          <!-- Floor 4 (top) -->
+          <g class="floor">
+            <rect x="180" y="120" width="220" height="40" fill="#9ab4c9"/>
+            <rect x="195" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="225" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="255" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="285" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="315" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="345" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="375" y="132" width="20" height="20" fill="rgba(0,0,0,0.25)"/>
+            <rect x="180" y="115" width="220" height="8" fill="#aac4d9"/>
+          </g>
+
+          <!-- Ground line -->
+          <line class="ground" x1="20" y1="262" x2="460" y2="262" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+        </svg>
+        <div class="build-scene-label">Building Up. Built to Last.</div>
+      </div>
+      <div class="hero-card">
+        <div class="hero-card-dot"></div>
+        <strong>Florida &amp; Nationwide</strong>
+        <p>Headquartered in Apollo Beach, FL. Licensed across the continental U.S.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES OVERVIEW -->
+  <div class="home-services">
+    <div class="section-label">What We Do</div>
+    <h2>Engineering Services</h2>
+    <p class="section-intro">Comprehensive structural solutions for commercial, residential, and industrial projects of all scales.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Structural Engineering</h3>
+        <p>Design and analysis of structural systems for new construction, renovations, and adaptive reuse.</p>
+        <a href="services.html#structural" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>Shoring &amp; Formwork Engineering</h3>
+        <p>Engineering design and review for shoring systems, concrete formwork, and temporary structures.</p>
+        <a href="services.html#shoring" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Truss Engineering &amp; Repairs</h3>
+        <p>Analysis, design, and repair documentation for wood and metal truss systems of any complexity.</p>
+        <a href="services.html#truss" class="service-link">Learn more →</a>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Structural Inspections</h3>
+        <p>On-site condition assessments, load evaluations, and written reports for permitting and litigation.</p>
+        <a href="services.html#inspections" class="service-link">Learn more →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT STRIP -->
+  <div class="about-strip">
+    <div class="about-strip-img" style="background:none; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&q=80&fit=crop" alt="Construction team" style="width:100%;height:100%;object-fit:cover;" />
+    </div>
+    <div class="about-strip-content">
+      <div class="section-label">About Dansco</div>
+      <div class="founded-badge">
+        <span class="yr">1987</span>
+        <span class="lbl">Founded</span>
+      </div>
+      <p>Dansco Engineering, LLC has provided quality structural engineering services since 1987. Founded by Samuel A. Greenberg, P.E., the firm serves contractors, developers, and property owners across more than 30 states with fast turnarounds and personalized service.</p>
+      <a href="about.html" class="btn-primary">Meet the Team</a>
+    </div>
+  </div>
+
+  <!-- PROJECTS PREVIEW -->
+  <div class="projects-preview">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <div class="section-label">Our Work</div>
+        <h2>Selected Projects</h2>
+      </div>
+      <a href="projects.html" class="btn-outline">View All Projects</a>
+    </div>
+    <div class="preview-grid">
+      <div class="preview-card">
+        <div class="preview-card-img" style="height:340px; background:none; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&fit=crop" alt="Commercial building" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="preview-card-info">
+          <span class="preview-card-tag">Structural</span>
+          <h3>Commercial Building Renovation</h3>
+          <p>Multi-story office structural analysis &amp; retrofit — Tampa, FL</p>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-card-img" style="height:200px; background:none; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=600&q=80&fit=crop" alt="Shoring formwork" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="preview-card-info">
+          <span class="preview-card-tag">Shoring</span>
+          <h3>High-Rise Formwork</h3>
+          <p>18-story tower — Miami, FL</p>
+        </div>
+      </div>
+      <div class="preview-card">
+        <div class="preview-card-img" style="height:200px; background:none; overflow:hidden;">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Truss structure" style="width:100%;height:100%;object-fit:cover;" />
+        </div>
+        <div class="preview-card-info">
+          <span class="preview-card-tag">Truss</span>
+          <h3>Residential Truss Repair</h3>
+          <p>Hurricane damage — Naples, FL</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TESTIMONIALS -->
+  <div class="testimonials-section">
+    <div class="section-label">Google Reviews</div>
+    <h2>What Our Clients Say</h2>
+    <div class="reviews-meta">
+      <div class="reviews-meta-rating">
+        <span class="score">4.8</span>
+        <div>
+          <div class="stars">★ ★ ★ ★ ★</div>
+          <div class="count">Based on Google reviews</div>
+        </div>
+      </div>
+      <a href="https://www.google.com/search?q=Dansco+Engineering+reviews" target="_blank" rel="noopener" class="review-cta">Read all reviews →</a>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar" style="background: oklch(0.55 0.15 250)">EH</div>
+          <div class="t-head-info">
+            <strong>Eugene Henry</strong>
+            <div class="t-meta">
+              <svg class="t-google-g" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.4-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.5 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.3-.1-2.6-.4-3.9z"/></svg>
+              <span>Local Guide · 33 reviews</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p>Dansco Engineering is remarkable. Their teams know all aspects of construction from the past to current and upcoming codes. Their experience spans the United States, and they treat employees and customers with the greatest respect!</p>
+        <div class="t-date">2 weeks ago</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar" style="background: oklch(0.6 0.16 30)">BR</div>
+          <div class="t-head-info">
+            <strong>Bill Rilea</strong>
+            <div class="t-meta">
+              <svg class="t-google-g" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.4-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.5 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.3-.1-2.6-.4-3.9z"/></svg>
+              <span>Local Guide · 48 reviews</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p>Knowledgeable about buildings and our community. Priceless experience. Thank you Sam. My clients are always happy we called upon Dansco.</p>
+        <div class="t-date">6 months ago</div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-head">
+          <div class="t-avatar" style="background: oklch(0.55 0.16 145)">JM</div>
+          <div class="t-head-info">
+            <strong>Javier Mayol</strong>
+            <div class="t-meta">
+              <svg class="t-google-g" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.6-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 16 19 13 24 13c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.4 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.4-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.5 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.3-.1-2.6-.4-3.9z"/></svg>
+              <span>Local Guide · 438 reviews</span>
+            </div>
+          </div>
+        </div>
+        <div class="t-stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <p>Great customer service. Pat was a valued asset to the project and Sam was super helpful. Would definitely use them again in the future.</p>
+        <div class="t-date">1 month ago</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div>
+      <h2>Ready to start your project?</h2>
+      <p>Reach out for a consultation — fast, professional, and nationwide.</p>
+    </div>
+    <a href="contact.html" class="btn-white">Contact Us Today</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="uploads/logo-white-transparent.png" alt="Dansco Engineering, LLC" />
+        <p>Providing quality structural engineering solutions since 1987. Licensed in 30+ states, headquartered in Apollo Beach, Florida.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="services.html#structural">Structural Engineering</a></li>
+          <li><a href="services.html#shoring">Shoring &amp; Formwork</a></li>
+          <li><a href="services.html#truss">Truss Engineering</a></li>
+          <li><a href="services.html#inspections">Structural Inspections</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#team">Our Team</a></li>
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Service Areas</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:8136450166">(813) 645-0166</a></li>
+          <li><a href="mailto:info@danscoengineering.com">info@danscoengineering.com</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Dansco+Engineering+Apollo+Beach+FL" target="_blank" rel="noopener">Apollo Beach, FL</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dansco Engineering, LLC. All rights reserved.</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script src="animations.js?v1777554202983"></script>
+</body>
+</html>
