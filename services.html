@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Dansco Engineering, LLC</title>
+  <link rel="stylesheet" href="shared.css?v1777554202983" />
+  <style>
+    /* ── SERVICE BLOCKS ── */
+    .service-block {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+      align-items: start; padding: 96px 72px;
+    }
+    .service-block.reverse { direction: rtl; }
+    .service-block.reverse > * { direction: ltr; }
+    .service-block.alt { background: var(--white); }
+
+    .service-img-wrap {
+      position: sticky; top: calc(var(--nav-h) + 60px);
+    }
+
+    .service-img {
+      aspect-ratio: 4/3; border-radius: 4px; overflow: hidden;
+      position: relative;
+    }
+    .service-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .service-num-badge {
+      position: absolute; top: 20px; left: 20px;
+      background: var(--brand); color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 0.1em; padding: 6px 14px;
+      border-radius: 2px; z-index: 2;
+    }
+
+    /* Extra image below main */
+    .service-img-sub {
+      margin-top: 12px; border-radius: 4px; overflow: hidden; height: 160px;
+    }
+    .service-img-sub img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Content */
+    .service-content h2 { margin-bottom: 14px; }
+    .service-intro { font-size: 17px; font-weight: 300; color: var(--text-mid); line-height: 1.75; margin-bottom: 20px; }
+    .service-body { font-size: 15px; color: var(--text-mid); line-height: 1.75; margin-bottom: 28px; }
+
+    /* Two-col bullets */
+    .service-bullets {
+      list-style: none;
+      column-count: 2;
+      column-gap: 32px;
+      margin-bottom: 32px;
+    }
+    .service-bullets li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; color: var(--text);
+      line-height: 1.5;
+      margin-bottom: 12px;
+      break-inside: avoid;
+    }
+    .service-bullets li::before {
+      content: ''; flex-shrink: 0; width: 6px; height: 6px;
+      border-radius: 50%; background: var(--brand); margin-top: 7px;
+    }
+
+    /* Deliverables */
+    .deliverables {
+      background: var(--bg); border-radius: 4px; padding: 24px 28px;
+      margin-bottom: 28px; border-left: 3px solid var(--brand);
+    }
+    .deliverables h4 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 12px;
+    }
+    .deliverables ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .deliverables ul li { font-size: 14px; color: var(--text-mid); display: flex; align-items: center; gap: 10px; }
+    .deliverables ul li::before {
+      content: '→'; color: var(--brand); font-weight: 600; flex-shrink: 0;
+    }
+
+    /* Who it's for */
+    .who-for {
+      margin-bottom: 32px;
+    }
+    .who-for h4 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-light); margin-bottom: 10px;
+    }
+    .who-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .who-chip {
+      padding: 5px 14px; border: 1px solid var(--rule); border-radius: 2px;
+      font-size: 13px; color: var(--text-mid); background: var(--white);
+    }
+
+    /* Divider between sections */
+    .service-divider {
+      height: 1px; background: var(--rule); margin: 0 72px;
+    }
+
+    /* ── STICKY TABS ── */
+    .services-tabs {
+      background: var(--white); border-bottom: 1px solid var(--rule);
+      padding: 0 72px; position: sticky; top: var(--nav-h); z-index: 50;
+      display: flex; gap: 0; overflow-x: auto;
+    }
+    .services-tabs a {
+      display: block; padding: 18px 24px; white-space: nowrap;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 14px;
+      font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--text-mid); text-decoration: none;
+      border-bottom: 2px solid transparent; transition: all 0.2s;
+    }
+    .services-tabs a:hover { color: var(--brand); border-bottom-color: var(--brand); }
+    .services-tabs a.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--brand-dark); padding: 40px 72px;
+      display: grid; grid-template-columns: repeat(4,1fr); gap: 0;
+    }
+    .stat-item {
+      text-align: center; padding: 0 24px;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-big {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 48px;
+      font-weight: 700; color: var(--white); line-height: 1;
+    }
+    .stat-desc { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 6px; }
+
+    @media (max-width: 900px) {
+      .service-block { grid-template-columns: 1fr; padding: 56px 24px; gap: 40px; direction: ltr !important; }
+      .service-img-wrap { position: static; }
+      .service-bullets { grid-template-columns: 1fr; }
+      .services-tabs { padding: 0 24px; }
+      .stats-bar { grid-template-columns: 1fr 1fr; gap: 24px; padding: 40px 24px; }
+      .stat-item { border-right: none; }
+      .service-divider { margin: 0 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="uploads/logo-horizontal.png" alt="Dansco Engineering, LLC" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-item">
+        <a href="services.html" class="active">Services ▾</a>
+        <div class="dropdown">
+          <a href="#structural">Structural Engineering</a>
+          <a href="#shoring">Shoring &amp; Formwork Engineering</a>
+          <a href="#truss">Truss Engineering &amp; Repairs</a>
+          <a href="#inspections">Structural Inspections</a>
+        </div>
+      </li>
+      <li><a href="projects.html">Projects</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect y="0" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="7" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="14" width="22" height="2" rx="1" fill="#4a6478"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div class="page-header">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Services</div>
+    <h1>Our Engineering Services</h1>
+    <p>Comprehensive structural solutions for projects of any scale — delivered with precision, speed, and 37+ years of experience.</p>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-big">37+</div>
+      <div class="stat-desc">Years of practice</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big">30+</div>
+      <div class="stat-desc">States licensed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big">4</div>
+      <div class="stat-desc">Core service disciplines</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-big">Fast</div>
+      <div class="stat-desc">Turnaround on stamped drawings</div>
+    </div>
+  </div>
+
+  <!-- STICKY TABS -->
+  <div class="services-tabs">
+    <a href="#structural" class="active">Structural Engineering</a>
+    <a href="#shoring">Shoring &amp; Formwork</a>
+    <a href="#truss">Truss Engineering</a>
+    <a href="#inspections">Structural Inspections</a>
+  </div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 01 STRUCTURAL ENGINEERING -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="structural" class="service-block">
+
+    <div class="service-img-wrap">
+      <div class="service-img">
+        <span class="service-num-badge">01</span>
+        <!-- Engineer reviewing structural drawings on site -->
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80&fit=crop" alt="Engineer reviewing structural drawings" />
+      </div>
+      <div class="service-img-sub">
+        <!-- Steel columns and beams being erected -->
+        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=800&q=80&fit=crop" alt="Steel structural frame" />
+      </div>
+    </div>
+
+    <div class="service-content">
+      <div class="section-label">Service 01</div>
+      <h2>Structural Engineering</h2>
+      <p class="service-intro">From single-family homes to multi-story commercial and industrial facilities, we design and analyze complete structural systems — built to code, built to budget, and built to last. Licensed in 30+ states with deep experience in Florida's high-wind environment.</p>
+      <p class="service-body">Dansco has provided full-service structural engineering since 1987. We work directly with architects, general contractors, developers, and owners to deliver accurate, constructible, and cost-effective designs — from early schematic concepts to stamped construction documents ready for permit submission.</p>
+      <p class="service-body">Our engineers are versed in steel, reinforced concrete, wood, masonry, and cold-formed steel systems, and we bring practical field knowledge to every drawing we produce. When projects need a second opinion, peer review, or forensic investigation, we provide that too.</p>
+
+      <ul class="service-bullets">
+        <li>New construction structural design</li>
+        <li>Building renovation, retrofit &amp; adaptive reuse</li>
+        <li>Foundation &amp; slab-on-grade design</li>
+        <li>Wind &amp; seismic lateral load analysis</li>
+        <li>Steel, concrete, wood &amp; masonry systems</li>
+        <li>Cold-formed steel &amp; light-gauge framing</li>
+        <li>Connection design &amp; detailing</li>
+        <li>Hurricane retrofit &amp; wind mitigation engineering</li>
+        <li>Special / threshold inspector services</li>
+        <li>Stamped drawings &amp; structural calculations</li>
+        <li>Engineering letters &amp; code certifications</li>
+        <li>Construction phase observation &amp; RFI support</li>
+        <li>Peer review &amp; second-opinion services</li>
+        <li>Forensic structural engineering &amp; expert reports</li>
+      </ul>
+
+      <div class="deliverables">
+        <h4>What You Receive</h4>
+        <ul>
+          <li>Stamped &amp; signed structural drawings</li>
+          <li>Complete structural calculations package</li>
+          <li>Engineering letters &amp; code-compliance certifications</li>
+          <li>Coordination with architect, contractor &amp; building department</li>
+          <li>Construction-phase support &amp; field consultation</li>
+        </ul>
+      </div>
+
+      <div class="who-for">
+        <h4>Who This Is For</h4>
+        <div class="who-chips">
+          <span class="who-chip">General Contractors</span>
+          <span class="who-chip">Architects</span>
+          <span class="who-chip">Developers</span>
+          <span class="who-chip">Property Owners</span>
+          <span class="who-chip">Municipalities</span>
+          <span class="who-chip">Insurance Carriers</span>
+          <span class="who-chip">Attorneys</span>
+        </div>
+      </div>
+
+      <a href="contact.html" class="btn-primary">Request Structural Engineering</a>
+    </div>
+  </div>
+
+  <div class="service-divider"></div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 02 SHORING & FORMWORK -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="shoring" class="service-block reverse alt">
+
+    <div class="service-img-wrap">
+      <div class="service-img">
+        <span class="service-num-badge">02</span>
+        <!-- Construction site with elevated slab and shoring -->
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=900&q=80&fit=crop" alt="Construction shoring system" />
+      </div>
+      <div class="service-img-sub">
+        <!-- Workers on scaffolding / concrete work -->
+        <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?w=800&q=80&fit=crop" alt="Concrete slab construction" />
+      </div>
+    </div>
+
+    <div class="service-content">
+      <div class="section-label">Service 02</div>
+      <h2>Shoring &amp; Formwork Engineering</h2>
+      <p class="service-intro">We engineer shoring systems, concrete formwork, and temporary structures — and provide pre-pour inspections — that keep your construction operations safe, code-compliant, and on schedule, from residential pours to high-rise core walls.</p>
+      <p class="service-body">Improperly designed shoring and formwork is one of the leading causes of construction accidents and delays. Our licensed engineers provide complete design packages that satisfy OSHA requirements, local building department requirements, and the structural demands of your specific pour sequence and loading conditions.</p>
+      <p class="service-body">In addition to design, we perform pre-pour shoring and formwork inspections to verify the system is built per the engineered drawings before concrete placement — a critical safety and quality checkpoint.</p>
+
+      <ul class="service-bullets">
+        <li>Wall, column, beam &amp; foundation form design</li>
+        <li>Shoring system design &amp; load calcs</li>
+        <li>Reshoring &amp; backshoring analysis</li>
+        <li>Elevated slab shoring layouts</li>
+        <li>Pre-pour shoring &amp; formwork inspection</li>
+        <li>Access scaffold design</li>
+        <li>Temporary structure design</li>
+        <li>OSHA-compliant documentation</li>
+        <li>Shop drawing review &amp; approval</li>
+        <li>Field consultation &amp; RFI response</li>
+      </ul>
+
+      <div class="deliverables">
+        <h4>What You Receive</h4>
+        <ul>
+          <li>Stamped shoring / formwork design drawings</li>
+          <li>Load calculations and material specifications</li>
+          <li>Pour sequence recommendations</li>
+          <li>OSHA submittal-ready documentation package</li>
+        </ul>
+      </div>
+
+      <div class="who-for">
+        <h4>Who This Is For</h4>
+        <div class="who-chips">
+          <span class="who-chip">Concrete Subcontractors</span>
+          <span class="who-chip">General Contractors</span>
+          <span class="who-chip">Construction Managers</span>
+          <span class="who-chip">Developers</span>
+        </div>
+      </div>
+
+      <a href="contact.html" class="btn-primary">Request Shoring Engineering</a>
+    </div>
+  </div>
+
+  <div class="service-divider"></div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 03 TRUSS ENGINEERING & REPAIRS -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="truss" class="service-block">
+
+    <div class="service-img-wrap">
+      <div class="service-img">
+        <span class="service-num-badge">03</span>
+        <!-- Triangular roof truss framing in residential construction -->
+        <img src="https://images.unsplash.com/photo-1599619351208-3e6c839d6828?w=900&q=80&fit=crop" alt="Wood roof truss framing" />
+      </div>
+      <div class="service-img-sub">
+        <!-- Wood truss / engineered wood product detail -->
+        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=800&q=80&fit=crop" alt="Engineered wood truss detail" />
+      </div>
+    </div>
+
+    <div class="service-content">
+      <div class="section-label">Service 03</div>
+      <h2>Truss and EWP Engineering Reviews and Repairs</h2>
+      <p class="service-intro">We work with some of the leading truss manufacturers and building contractors around the country, providing them with sealed engineered truss &amp; EWP design drawings, layouts and repair solutions.</p>
+      <p class="service-body">Whether it's reviewing truss designs for compliance or generating repair details for a variety of conditions, our team has you covered. With over 100 years combined experience in the truss industry, you can be assured we will provide expert consultation, analysis and solutions for your Truss and EWP requirements.</p>
+
+      <ul class="service-bullets">
+        <li>Truss &amp; EWP Design Review</li>
+        <li>Truss &amp; EWP Repair Solutions</li>
+        <li>Truss &amp; EWP Layout Review</li>
+        <li>Timber Truss Design</li>
+        <li>Load Modification Evaluations</li>
+        <li>Litigation Support &amp; Expert Opinions</li>
+        <li>Field Splice Connections</li>
+        <li>Permanent Bracing Plans for Truss Systems</li>
+        <li>Hurricane &amp; Storm Damage Assessment</li>
+        <li>Insurance Documentation Reports</li>
+      </ul>
+
+      <div class="deliverables">
+        <h4>What You Receive</h4>
+        <ul>
+          <li>Stamped engineering report with findings</li>
+          <li>Repair detail drawings (when applicable)</li>
+          <li>Load calculations and analysis summary</li>
+          <li>Insurance-ready documentation package</li>
+        </ul>
+      </div>
+
+      <div class="who-for">
+        <h4>Who This Is For</h4>
+        <div class="who-chips">
+          <span class="who-chip">Property Owners</span>
+          <span class="who-chip">Insurance Carriers</span>
+          <span class="who-chip">Roofing Contractors</span>
+          <span class="who-chip">General Contractors</span>
+          <span class="who-chip">Attorneys</span>
+        </div>
+      </div>
+
+      <a href="contact.html" class="btn-primary">Request Truss &amp; EWP Engineering</a>
+    </div>
+  </div>
+
+  <div class="service-divider"></div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!-- 04 STRUCTURAL INSPECTIONS -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="inspections" class="service-block reverse alt">
+
+    <div class="service-img-wrap">
+      <div class="service-img">
+        <span class="service-num-badge">04</span>
+        <!-- Engineer on site reviewing inspection findings -->
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80&fit=crop" alt="Engineer conducting structural inspection" />
+      </div>
+      <div class="service-img-sub">
+        <!-- Engineer reviewing inspection report / documentation -->
+        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&fit=crop" alt="Inspection documentation" />
+      </div>
+    </div>
+
+    <div class="service-content">
+      <div class="section-label">Service 04</div>
+      <h2>Structural Inspections</h2>
+      <p class="service-intro">Our licensed engineers perform thorough on-site structural condition assessments and deliver stamped, written reports suitable for permitting, insurance claims, property transactions, milestone recertification, and litigation — typically within 48 hours of the site visit.</p>
+      <p class="service-body">A structural inspection from a licensed P.E. carries weight with building departments, insurance carriers, lenders, and courts. We inspect all types of residential, commercial, and industrial structures — documenting existing conditions, identifying deficiencies, and recommending corrective action when needed.</p>
+      <p class="service-body">Florida-based projects can rely on Dansco for Milestone (40-year) and Phase 1 / Phase 2 recertifications, threshold inspections, wind mitigation surveys, and post-storm damage documentation. We're equally at home with pre-purchase due diligence and forensic investigations.</p>
+
+      <ul class="service-bullets">
+        <li>Structural condition assessments</li>
+        <li>Milestone &amp; 40-year recertification (FL)</li>
+        <li>Phase 1 &amp; Phase 2 structural inspections</li>
+        <li>Threshold inspector services</li>
+        <li>Wind mitigation surveys</li>
+        <li>Pre-purchase due diligence inspections</li>
+        <li>Post-storm &amp; post-fire damage documentation</li>
+        <li>Load capacity evaluations</li>
+        <li>Foundation &amp; slab inspections</li>
+        <li>Concrete deterioration assessments</li>
+        <li>Roof structure inspections</li>
+        <li>Retaining wall evaluations</li>
+        <li>Special inspections per IBC 1704</li>
+        <li>Insurance claim documentation</li>
+        <li>Forensic investigations</li>
+        <li>Expert witness &amp; litigation support</li>
+      </ul>
+
+      <div class="deliverables">
+        <h4>What You Receive</h4>
+        <ul>
+          <li>Stamped written engineering report</li>
+          <li>Photo documentation of observed conditions</li>
+          <li>Summary of findings &amp; recommendations</li>
+          <li>Repair scope / remediation guidance (when applicable)</li>
+          <li>Code-compliance certifications (Milestone, threshold, etc.)</li>
+        </ul>
+      </div>
+
+      <div class="who-for">
+        <h4>Who This Is For</h4>
+        <div class="who-chips">
+          <span class="who-chip">Property Buyers &amp; Sellers</span>
+          <span class="who-chip">HOAs &amp; Condo Boards</span>
+          <span class="who-chip">Property Managers</span>
+          <span class="who-chip">Insurance Carriers</span>
+          <span class="who-chip">Lenders</span>
+          <span class="who-chip">Building Departments</span>
+          <span class="who-chip">Attorneys</span>
+          <span class="who-chip">General Contractors</span>
+        </div>
+      </div>
+
+      <a href="contact.html" class="btn-primary">Request a Structural Inspection</a>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <div>
+      <h2>Not sure which service you need?</h2>
+      <p>Call us and we'll point you in the right direction — no obligation.</p>
+    </div>
+    <a href="contact.html" class="btn-white">Contact Us Today</a>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="uploads/logo-white-transparent.png" alt="Dansco Engineering, LLC" />
+        <p>Providing quality structural engineering solutions since 1987. Licensed in 30+ states, headquartered in Apollo Beach, Florida.</p>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="#structural">Structural Engineering</a></li>
+        <li><a href="#shoring">Shoring &amp; Formwork</a></li>
+        <li><a href="#truss">Truss Engineering</a></li>
+        <li><a href="#inspections">Structural Inspections</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#team">Our Team</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Service Areas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="tel:8136450166">(813) 645-0166</a></li>
+        <li><a href="mailto:info@danscoengineering.com">info@danscoengineering.com</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Dansco+Engineering+Apollo+Beach+FL" target="_blank" rel="noopener">Apollo Beach, FL</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dansco Engineering, LLC. All rights reserved.</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+    const sections = ['structural','shoring','truss','inspections'];
+    const tabs = document.querySelectorAll('.services-tabs a');
+    window.addEventListener('scroll', () => {
+      let cur = sections[0];
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 160) cur = id;
+      });
+      tabs.forEach(t => {
+        t.classList.toggle('active', t.getAttribute('href') === '#' + cur);
+      });
+    });
+  </script>
+
+  <script src="animations.js?v1777554202983"></script>
+</body>
+</html>

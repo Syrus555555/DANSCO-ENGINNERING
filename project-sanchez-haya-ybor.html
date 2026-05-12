@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sanchez & Haya Building Restoration — Dansco Engineering</title>
+  <link rel="stylesheet" href="shared.css?v1777554202983" />
+  <style>
+    /* Project Detail */
+    .pd-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--brand); text-decoration: none;
+      margin-bottom: 28px; transition: gap 0.2s, color 0.2s;
+    }
+    .pd-back:hover { gap: 12px; color: var(--brand-dark); }
+
+    .pd-header {
+      padding: 56px 72px 0;
+    }
+    .pd-cat {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .pd-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(36px, 4vw, 56px); font-weight: 700;
+      line-height: 1.05; color: var(--text); margin-bottom: 20px; max-width: 900px;
+    }
+    .pd-meta {
+      display: flex; flex-wrap: wrap; gap: 32px;
+      padding: 20px 0 32px; border-bottom: 1px solid var(--rule);
+      margin-bottom: 48px;
+    }
+    .pd-meta-item {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .pd-meta-item .lbl {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-light);
+    }
+    .pd-meta-item .val { font-size: 15px; font-weight: 500; color: var(--text); }
+
+    .pd-hero {
+      padding: 0 72px 56px;
+    }
+    .pd-hero-img {
+      width: 100%; aspect-ratio: 16/10; overflow: hidden; border-radius: 4px;
+      background: var(--bg-alt);
+    }
+    .pd-hero-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+
+    .pd-body {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 64px;
+      padding: 0 72px 64px;
+    }
+    .pd-body p {
+      font-size: 17px; line-height: 1.8; color: var(--text-mid); margin-bottom: 16px;
+    }
+    .pd-facts {
+      background: var(--bg-alt); padding: 32px;
+      border-radius: 4px; border-top: 3px solid var(--brand);
+      align-self: start;
+    }
+    .pd-facts h4 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--brand); margin-bottom: 16px;
+    }
+    .pd-facts dl { display: grid; gap: 14px; }
+    .pd-facts dt {
+      font-size: 12px; font-family: 'Barlow Condensed', sans-serif;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light);
+    }
+    .pd-facts dd { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+
+    .pd-gallery-section {
+      padding: 64px 72px 96px;
+      background: var(--bg-alt);
+    }
+    .pd-gallery-section .section-label { margin-bottom: 6px; }
+    .pd-gallery-section h2 { margin-bottom: 32px; }
+    .pd-gallery {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .pd-gallery-item {
+      aspect-ratio: 4/3; overflow: hidden; border-radius: 4px;
+      cursor: zoom-in; background: var(--bg);
+      transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .pd-gallery-item:hover { transform: scale(1.02); }
+    .pd-gallery-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+    .pd-gallery-item:hover img { transform: scale(1.05); }
+
+    /* Lightbox */
+    .lb-overlay {
+      position: fixed; inset: 0;
+      background: rgba(20,28,36,0.94); z-index: 200;
+      display: none; align-items: center; justify-content: center;
+      padding: 40px; cursor: zoom-out;
+      animation: lbFade 0.2s ease-out;
+    }
+    .lb-overlay.open { display: flex; }
+    @keyframes lbFade { from { opacity: 0; } to { opacity: 1; } }
+    .lb-img { max-width: 100%; max-height: 100%; object-fit: contain; }
+    .lb-close {
+      position: absolute; top: 24px; right: 32px;
+      background: rgba(255,255,255,0.1); border: none;
+      color: white; width: 44px; height: 44px; border-radius: 50%;
+      font-size: 24px; cursor: pointer; line-height: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.2); }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); border: none;
+      color: white; width: 48px; height: 48px; border-radius: 50%;
+      font-size: 20px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.2); }
+    .lb-prev { left: 24px; }
+    .lb-next { right: 24px; }
+    .lb-counter {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.7); font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 900px) {
+      .pd-header { padding: 40px 24px 0; }
+      .pd-hero { padding: 0 24px 40px; }
+      .pd-body { grid-template-columns: 1fr; padding: 0 24px 48px; gap: 32px; }
+      .pd-gallery-section { padding: 48px 24px 64px; }
+      .pd-gallery { grid-template-columns: 1fr; }
+      .pd-meta { gap: 20px; }
+      .lb-nav { width: 40px; height: 40px; }
+      .lb-prev { left: 12px; }
+      .lb-next { right: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="uploads/logo-horizontal.png" alt="Dansco Engineering, LLC" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-item">
+        <a href="services.html">Services ▾</a>
+        <div class="dropdown">
+          <a href="services.html#structural">Structural Engineering</a>
+          <a href="services.html#shoring">Shoring &amp; Formwork Engineering</a>
+          <a href="services.html#truss">Truss &amp; EWP Engineering</a>
+          <a href="services.html#inspections">Structural Inspections</a>
+        </div>
+      </li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect y="0" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="7" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="14" width="22" height="2" rx="1" fill="#4a6478"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div class="pd-header" style="margin-top: var(--nav-h);">
+    <a href="projects.html" class="pd-back">← Back to all projects</a>
+    <div class="pd-cat">Wall Bracing &amp; Restoration</div>
+    <h1 class="pd-title">Sanchez &amp; Haya Building Restoration</h1>
+    <div class="pd-meta">
+      <div class="pd-meta-item"><span class="lbl">Location</span><span class="val">Ybor City, Tampa, FL</span></div>
+      <div class="pd-meta-item"><span class="lbl">Client</span><span class="val">Sanchez &amp; Haya Building</span></div>
+      <div class="pd-meta-item"><span class="lbl">Year</span><span class="val">2024</span></div>
+      <div class="pd-meta-item"><span class="lbl">Service</span><span class="val">Wall Bracing &amp; Restoration</span></div>
+    </div>
+  </div>
+
+  <div class="pd-hero">
+    <div class="pd-hero-img"><img src="projects/sanchez-haya-ybor/photo-1.jpg" alt="Sanchez and Haya Building Restoration" /></div>
+  </div>
+
+  <div class="pd-body">
+    <div>
+      <div class="section-label">Project Overview</div>
+      <h2 style="margin-bottom: 24px;">About this project</h2>
+      <p>Wall bracing and shoring engineering for the historic Sanchez &amp; Haya building restoration in Ybor City. Dansco designed the bracing to preserve the masonry facade while interior reconstruction proceeded.</p>
+      <p>Dansco Engineering provided complete engineering documentation including stamped drawings, structural calculations, and on-site coordination. The project demonstrates our team's experience in delivering precision shoring and formwork solutions under tight schedule and site constraints.</p>
+      <a href="contact.html" class="btn-primary" style="margin-top: 20px;">Start a Similar Project</a>
+    </div>
+    <aside class="pd-facts">
+      <h4>Project Facts</h4>
+      <dl>
+        <dt>Project</dt><dd>Sanchez &amp; Haya Building Restoration</dd>
+        <dt>Location</dt><dd>Ybor City, Tampa, FL</dd>
+        <dt>Year</dt><dd>2024</dd>
+        <dt>Service</dt><dd>Wall Bracing &amp; Restoration</dd>
+        <dt>Engineer</dt><dd>Dansco Engineering, LLC</dd>
+      </dl>
+    </aside>
+  </div>
+
+  
+  <div class="pd-gallery-section">
+    <div class="section-label">Gallery</div>
+    <h2>Project Photos</h2>
+    <div class="pd-gallery">
+      <div class="pd-gallery-item" data-idx="0"><img src="projects/sanchez-haya-ybor/photo-1.jpg" alt="Sanchez and Haya Building Restoration photo 1" loading="lazy" /></div>
+      <div class="pd-gallery-item" data-idx="1"><img src="projects/sanchez-haya-ybor/photo-2.jpg" alt="Sanchez and Haya Building Restoration photo 2" loading="lazy" /></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div>
+      <h2>Have a similar project?</h2>
+      <p>Let's discuss how we can help.</p>
+    </div>
+    <a href="contact.html" class="btn-white">Get a Quote</a>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="uploads/logo-white-transparent.png" alt="Dansco Engineering, LLC" />
+        <p>Providing quality structural engineering solutions since 1987. Licensed in 30+ states, headquartered in Apollo Beach, Florida.</p>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html#structural">Structural Engineering</a></li>
+        <li><a href="services.html#shoring">Shoring &amp; Formwork</a></li>
+        <li><a href="services.html#truss">Truss &amp; EWP</a></li>
+        <li><a href="services.html#inspections">Structural Inspections</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#team">Our Team</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="tel:8136450166">(813) 645-0166</a></li>
+        <li><a href="mailto:info@danscoengineering.com">info@danscoengineering.com</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Dansco+Engineering+Apollo+Beach+FL" target="_blank" rel="noopener">Apollo Beach, FL</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dansco Engineering, LLC. All rights reserved.</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lb-overlay" id="lightbox">
+    <button class="lb-close" id="lbClose" aria-label="Close">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous">◀</button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next">▶</button>
+    <img class="lb-img" id="lbImg" alt="" />
+    <div class="lb-counter" id="lbCounter"></div>
+  </div>
+
+  <script src="animations.js?v1777554202983"></script>
+  <script>
+    (function(){
+      const items = document.querySelectorAll('.pd-gallery-item');
+      if (!items.length) return;
+      const overlay = document.getElementById('lightbox');
+      const img = document.getElementById('lbImg');
+      const counter = document.getElementById('lbCounter');
+      const photos = Array.from(items).map(i => ({src: i.querySelector('img').src, alt: i.querySelector('img').alt}));
+      let cur = 0;
+      function show(i) {
+        cur = (i + photos.length) % photos.length;
+        img.src = photos[cur].src;
+        img.alt = photos[cur].alt;
+        counter.textContent = (cur+1) + ' / ' + photos.length;
+      }
+      function open(i) { show(i); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+      items.forEach((el,i) => el.addEventListener('click', () => open(i)));
+      document.getElementById('lbClose').addEventListener('click', close);
+      document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); show(cur-1); });
+      document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); show(cur+1); });
+      overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
+      document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        else if (e.key === 'ArrowLeft') show(cur-1);
+        else if (e.key === 'ArrowRight') show(cur+1);
+      });
+    })();
+  </script>
+</body>
+</html>

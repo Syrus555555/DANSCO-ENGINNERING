@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Dansco Engineering, LLC</title>
+  <link rel="stylesheet" href="shared.css?v1777554202983" />
+  <style>
+    .projects-body { padding: 72px; }
+
+    /* FILTERS */
+    .filter-bar {
+      display: flex; align-items: center; gap: 10px;
+      flex-wrap: wrap; margin-bottom: 48px;
+    }
+    .filter-label {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px;
+      font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-light); margin-right: 6px;
+    }
+    .filter-btn {
+      padding: 8px 20px; border: 1px solid var(--rule); background: transparent;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 13px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-mid);
+      cursor: pointer; border-radius: 2px; transition: all 0.15s;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--brand); border-color: var(--brand); color: var(--white);
+    }
+
+    /* GRID */
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 24px;
+    }
+    .project-card {
+      background: var(--white); border-radius: 4px; overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
+    }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,0.1); }
+    .project-card[data-hidden] { display: none; }
+    .project-thumb {
+      aspect-ratio: 4/3;
+      background: repeating-linear-gradient(45deg,var(--bg-alt),var(--bg-alt) 8px,var(--bg) 8px,var(--bg) 16px);
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .project-thumb span {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+      letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-light);
+    }
+    .project-tag {
+      position: absolute; top: 14px; left: 14px;
+      background: var(--brand); color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+      font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 2px;
+    }
+    .project-info { padding: 22px 24px; }
+    .project-info h3 {
+      font-family: 'Barlow Condensed', sans-serif; font-size: 19px;
+      font-weight: 600; color: var(--text); margin-bottom: 6px;
+    }
+    .project-info p { font-size: 13px; color: var(--text-mid); line-height: 1.55; }
+    .project-meta {
+      display: flex; align-items: center; gap: 0;
+      margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--rule);
+    }
+    .project-meta span { font-size: 12px; color: var(--text-light); }
+    .project-meta span + span::before { content: ' · '; margin: 0 6px; }
+
+    .no-results {
+      grid-column: 1/-1; text-align: center; padding: 80px 0;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 18px; color: var(--text-light);
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 900px) {
+      .projects-body { padding: 40px 24px; }
+      .projects-grid { grid-template-columns: 1fr; }
+    }
+  
+      .project-card { text-decoration: none; color: inherit; }
+      .project-photo-count {
+        position: absolute; top: 14px; right: 14px;
+        background: rgba(30,40,48,0.85); color: #fff;
+        font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+        font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 4px 10px; border-radius: 2px; backdrop-filter: blur(4px);
+      }
+    </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="uploads/logo-horizontal.png" alt="Dansco Engineering, LLC" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="nav-item">
+        <a href="services.html">Services ▾</a>
+        <div class="dropdown">
+          <a href="services.html#structural">Structural Engineering</a>
+          <a href="services.html#shoring">Shoring &amp; Formwork Engineering</a>
+          <a href="services.html#truss">Truss Engineering &amp; Repairs</a>
+          <a href="services.html#inspections">Structural Inspections</a>
+        </div>
+      </li>
+      <li><a href="projects.html" class="active">Projects</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="contact.html" class="nav-cta">Get a Quote</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect y="0" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="7" width="22" height="2" rx="1" fill="#4a6478"/>
+        <rect y="14" width="22" height="2" rx="1" fill="#4a6478"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div class="page-header">
+    <div class="breadcrumb"><a href="index.html">Home</a> / Projects</div>
+    <h1>Our Work</h1>
+    <p>A selection of shoring, formwork, and structural engineering projects completed by Dansco Engineering across Florida and beyond. More projects from our truss, EWP, and structural inspection teams coming soon.</p>
+  </div>
+
+  <div class="projects-body">
+    <div class="filter-bar">
+      <span class="filter-label">Filter:</span>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="structural">Structural</button>
+      <button class="filter-btn" data-filter="shoring">Shoring</button>
+      <button class="filter-btn" data-filter="truss">Truss</button>
+      <button class="filter-btn" data-filter="inspection">Inspection</button>
+    </div>
+
+    <div class="projects-grid" id="grid">
+
+      <a href="project-st-pete-pier-y-column.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/st-pete-pier-y-column/photo-1.jpg" alt="St. Pete Pier — 'Y' Column Forms" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>St. Pete Pier — 'Y' Column Forms</h3>
+          <p>Custom formwork engineering for the iconic 'Y'-shaped column forms at the St.</p>
+          <div class="project-meta"><span>St. Petersburg, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-tia-hanger-roof.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/tia-hanger-roof/photo-1.jpg" alt="TIA Hangar Roof Framing Repair" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>TIA Hangar Roof Framing Repair</h3>
+          <p>Structural repair and shoring design for the Tampa International Airport hangar roof framing system.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Repair</span></div>
+        </div>
+      </a>
+      <a href="project-tgh-chiller.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/tgh-chiller/photo-1.jpg" alt="TGH Chiller Replacement Shoring" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">2 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>TGH Chiller Replacement Shoring</h3>
+          <p>Shoring engineering for the chiller plant replacement at Tampa General Hospital.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-st-anthony-mri.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/st-anthony-mri/photo-1.jpg" alt="St. Anthony Hospital MRI Expansion" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>St. Anthony Hospital MRI Expansion</h3>
+          <p>Shoring and structural support engineering for the MRI suite expansion at St.</p>
+          <div class="project-meta"><span>St. Petersburg, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-sanchez-haya-ybor.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/sanchez-haya-ybor/photo-1.jpg" alt="Sanchez and Haya Building Restoration" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">2 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Sanchez &amp; Haya Building Restoration</h3>
+          <p>Wall bracing and shoring engineering for the historic Sanchez &amp; Haya building restoration in Ybor City.</p>
+          <div class="project-meta"><span>Ybor City, Tampa, FL</span><span>Wall Bracing &amp; Restoration</span></div>
+        </div>
+      </a>
+      <a href="project-occc5a-bridge.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/occc5a-bridge/photo-1.jpg" alt="OCCC5A Bridge Project" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>OCCC5A Bridge Project</h3>
+          <p>Concrete shoring and formwork engineering for bridge construction operations.</p>
+          <div class="project-meta"><span>Florida</span><span>Bridge Shoring</span></div>
+        </div>
+      </a>
+      <a href="project-jesuit-press-box.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/jesuit-press-box/photo-1.jpg" alt="Jesuit HS Stadium Press Box" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Jesuit HS Stadium Press Box</h3>
+          <p>Shoring design for the new stadium press box construction at Jesuit High School Tampa.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-img-academy-stair.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/img-academy-stair/photo-1.jpg" alt="IMG Academy Emergency Stair" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>IMG Academy Emergency Stair</h3>
+          <p>Emergency stair shoring and structural support engineering at IMG Academy.</p>
+          <div class="project-meta"><span>Bradenton, FL</span><span>Emergency Shoring</span></div>
+        </div>
+      </a>
+      <a href="project-halifax-landing.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/halifax-landing/photo-1.jpg" alt="Halifax Landing Condominium" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Halifax Landing Condominium</h3>
+          <p>Concrete shoring and formwork engineering for the Halifax Landing condominium tower.</p>
+          <div class="project-meta"><span>Daytona Beach, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-dunedin-tai-chi.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/dunedin-tai-chi/photo-1.jpg" alt="Dunedin Tai Chi Center Wall Bracing" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Dunedin Tai Chi Center Wall Bracing</h3>
+          <p>Wall bracing engineering for facade preservation and reconstruction at the Dunedin Tai Chi Center.</p>
+          <div class="project-meta"><span>Dunedin, FL</span><span>Wall Bracing</span></div>
+        </div>
+      </a>
+      <a href="project-demarcay-wall-bracing.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/demarcay-wall-bracing/photo-1.jpg" alt="DeMarcay Building Wall Bracing" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>DeMarcay Building Wall Bracing</h3>
+          <p>Historic facade wall bracing for the DeMarcay Building redevelopment in downtown Sarasota.</p>
+          <div class="project-meta"><span>Sarasota, FL</span><span>Wall Bracing &amp; Restoration</span></div>
+        </div>
+      </a>
+      <a href="project-clearwater-aquarium-repair.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/clearwater-aquarium-repair/photo-1.jpg" alt="Clearwater Marine Aquarium Repair" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">5 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Clearwater Marine Aquarium Repair</h3>
+          <p>Structural repair and shoring engineering for the Clearwater Marine Aquarium facility.</p>
+          <div class="project-meta"><span>Clearwater, FL</span><span>Structural Repair</span></div>
+        </div>
+      </a>
+      <a href="project-clearwater-aquarium-manatee.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/clearwater-aquarium-manatee/photo-1.jpg" alt="Clearwater Aquarium Manatee Pool" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">3 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Clearwater Aquarium Manatee Pool</h3>
+          <p>Shoring and formwork engineering for the Manatee Pool construction at Clearwater Marine Aquarium.</p>
+          <div class="project-meta"><span>Clearwater, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-chapel-michell-crossing.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/chapel-michell-crossing/photo-1.jpg" alt="The Chapel at Mitchell Crossing" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">9 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>The Chapel at Mitchell Crossing</h3>
+          <p>Concrete shoring and formwork engineering for the chapel at Mitchell Crossing development.</p>
+          <div class="project-meta"><span>Florida</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-tampa-prep-stair.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/tampa-prep-stair/photo-1.jpg" alt="Tampa Prep Stair Shoring" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Tampa Prep Stair Shoring</h3>
+          <p>Shoring engineering for new stair construction at Tampa Preparatory School.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-valley-bank-column.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/valley-bank-column/photo-1.jpg" alt="Valley National Bank Column Replacement" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">3 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Valley National Bank Column Replacement</h3>
+          <p>Column replacement shoring and structural support engineering for the Valley National Bank building.</p>
+          <div class="project-meta"><span>Florida</span><span>Column Replacement &amp; Shoring</span></div>
+        </div>
+      </a>
+      <a href="project-academy-holy-names.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/academy-holy-names/photo-1.jpg" alt="Academy of the Holy Names" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Academy of the Holy Names</h3>
+          <p>Shoring engineering for the Northview building addition at Academy of the Holy Names.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+        </div>
+  </div>
+
+  <div class="cta-band">
+    <div>
+      <h2>Have a similar project?</h2>
+      <p>Let's discuss how we can help.</p>
+    </div>
+    <a href="contact.html" class="btn-white">Get a Quote</a>
+  </div>
+
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="uploads/logo-white-transparent.png" alt="Dansco Engineering, LLC" />
+        <p>Providing quality structural engineering solutions since 1987. Licensed in 30+ states, headquartered in Apollo Beach, Florida.</p>
+      </div>
+      <div class="footer-col"><h4>Services</h4><ul>
+        <li><a href="services.html#structural">Structural Engineering</a></li>
+        <li><a href="services.html#shoring">Shoring &amp; Formwork</a></li>
+        <li><a href="services.html#truss">Truss Engineering</a></li>
+        <li><a href="services.html#inspections">Structural Inspections</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Company</h4><ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="about.html#team">Our Team</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Service Areas</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul>
+        <li><a href="tel:8136450166">(813) 645-0166</a></li>
+        <li><a href="mailto:info@danscoengineering.com">info@danscoengineering.com</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Dansco+Engineering+Apollo+Beach+FL" target="_blank" rel="noopener">Apollo Beach, FL</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Dansco Engineering, LLC. All rights reserved.</span>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+  <script>
+    const btns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.project-card');
+    btns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        cards.forEach(c => {
+          if (f === 'all' || c.dataset.category === f) {
+            c.style.display = '';
+          } else {
+            c.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+
+  <script src="animations.js?v1777554202983"></script>
+</body>
+</html>
