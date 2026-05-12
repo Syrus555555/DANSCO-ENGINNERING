@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Projects — Dansco Engineering, LLC</title>
-  <link rel="stylesheet" href="shared.css?v1778602573" />
+  <link rel="stylesheet" href="shared.css?v1777554202983" />
   <style>
     .projects-body { padding: 72px; }
 
@@ -77,13 +77,22 @@
       .projects-body { padding: 40px 24px; }
       .projects-grid { grid-template-columns: 1fr; }
     }
-  </style>
+  
+      .project-card { text-decoration: none; color: inherit; }
+      .project-photo-count {
+        position: absolute; top: 14px; right: 14px;
+        background: rgba(30,40,48,0.85); color: #fff;
+        font-family: 'Barlow Condensed', sans-serif; font-size: 11px;
+        font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+        padding: 4px 10px; border-radius: 2px; backdrop-filter: blur(4px);
+      }
+    </style>
 </head>
 <body>
 
   <nav>
     <a href="index.html" class="nav-logo">
-      <img src="uploads/logo-1777477161197.jpg" alt="Dansco Engineering, LLC" />
+      <img src="uploads/logo-horizontal.png" alt="Dansco Engineering, LLC" />
     </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -113,7 +122,7 @@
   <div class="page-header">
     <div class="breadcrumb"><a href="index.html">Home</a> / Projects</div>
     <h1>Our Work</h1>
-    <p>A selection of structural engineering projects completed across the country.</p>
+    <p>A selection of shoring, formwork, and structural engineering projects completed by Dansco Engineering across Florida and beyond. More projects from our truss, EWP, and structural inspection teams coming soon.</p>
   </div>
 
   <div class="projects-body">
@@ -128,115 +137,194 @@
 
     <div class="projects-grid" id="grid">
 
-      <div class="project-card" data-category="structural">
+      <a href="project-st-pete-pier-y-column.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80&fit=crop" alt="Structural project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Structural</span>
-      </div>
-        <div class="project-info">
-          <h3>Commercial Building Renovation</h3>
-          <p>Structural analysis and retrofit design for a multi-story office building requiring full lateral system upgrade.</p>
-          <div class="project-meta"><span>Tampa, FL</span><span>Structural Engineering</span></div>
+          <img src="projects/st-pete-pier-y-column/photo-1.jpg" alt="St. Pete Pier — 'Y' Column Forms" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="shoring">
+        <div class="project-info">
+          <h3>St. Pete Pier — 'Y' Column Forms</h3>
+          <p>Custom formwork engineering for the iconic 'Y'-shaped column forms at the St.</p>
+          <div class="project-meta"><span>St. Petersburg, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-tia-hanger-roof.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=600&q=80&fit=crop" alt="Shoring project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Shoring</span>
-      </div>
-        <div class="project-info">
-          <h3>High-Rise Concrete Formwork</h3>
-          <p>Complete shoring and formwork engineering package for an 18-story residential tower pour sequence.</p>
-          <div class="project-meta"><span>Miami, FL</span><span>Shoring &amp; Formwork</span></div>
+          <img src="projects/tia-hanger-roof/photo-1.jpg" alt="TIA Hangar Roof Framing Repair" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="truss">
+        <div class="project-info">
+          <h3>TIA Hangar Roof Framing Repair</h3>
+          <p>Structural repair and shoring design for the Tampa International Airport hangar roof framing system.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Repair</span></div>
+        </div>
+      </a>
+      <a href="project-tgh-chiller.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&fit=crop" alt="Truss project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Truss</span>
-      </div>
-        <div class="project-info">
-          <h3>Residential Truss Repair</h3>
-          <p>Hurricane damage assessment and repair documentation for a 42-unit residential community.</p>
-          <div class="project-meta"><span>Naples, FL</span><span>Truss Repair</span></div>
+          <img src="projects/tgh-chiller/photo-1.jpg" alt="TGH Chiller Replacement Shoring" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">2 photos</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="inspection">
+        <div class="project-info">
+          <h3>TGH Chiller Replacement Shoring</h3>
+          <p>Shoring engineering for the chiller plant replacement at Tampa General Hospital.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-st-anthony-mri.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1581094271901-8022df4466f9?w=600&q=80&fit=crop" alt="Inspection project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Inspection</span>
-      </div>
-        <div class="project-info">
-          <h3>Industrial Facility Assessment</h3>
-          <p>Structural condition inspection and written report for insurance carrier review.</p>
-          <div class="project-meta"><span>Atlanta, GA</span><span>Structural Inspection</span></div>
+          <img src="projects/st-anthony-mri/photo-1.jpg" alt="St. Anthony Hospital MRI Expansion" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="structural">
+        <div class="project-info">
+          <h3>St. Anthony Hospital MRI Expansion</h3>
+          <p>Shoring and structural support engineering for the MRI suite expansion at St.</p>
+          <div class="project-meta"><span>St. Petersburg, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-sanchez-haya-ybor.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=600&q=80&fit=crop" alt="Structural project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Structural</span>
-      </div>
-        <div class="project-info">
-          <h3>Mixed-Use Development</h3>
-          <p>New construction structural system design for a ground-up mixed-use retail and residential project.</p>
-          <div class="project-meta"><span>Charlotte, NC</span><span>Structural Engineering</span></div>
+          <img src="projects/sanchez-haya-ybor/photo-1.jpg" alt="Sanchez and Haya Building Restoration" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">2 photos</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="shoring">
+        <div class="project-info">
+          <h3>Sanchez &amp; Haya Building Restoration</h3>
+          <p>Wall bracing and shoring engineering for the historic Sanchez &amp; Haya building restoration in Ybor City.</p>
+          <div class="project-meta"><span>Ybor City, Tampa, FL</span><span>Wall Bracing &amp; Restoration</span></div>
+        </div>
+      </a>
+      <a href="project-occc5a-bridge.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=600&q=80&fit=crop" alt="Shoring project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Shoring</span>
-      </div>
-        <div class="project-info">
-          <h3>Bridge Deck Reconstruction</h3>
-          <p>Temporary shoring system design for an active bridge deck replacement under traffic.</p>
-          <div class="project-meta"><span>Orlando, FL</span><span>Shoring &amp; Formwork</span></div>
+          <img src="projects/occc5a-bridge/photo-1.jpg" alt="OCCC5A Bridge Project" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="truss">
+        <div class="project-info">
+          <h3>OCCC5A Bridge Project</h3>
+          <p>Concrete shoring and formwork engineering for bridge construction operations.</p>
+          <div class="project-meta"><span>Florida</span><span>Bridge Shoring</span></div>
+        </div>
+      </a>
+      <a href="project-jesuit-press-box.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1597149165892-34d51eb527d6?w=600&q=80&fit=crop" alt="Truss project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Truss</span>
-      </div>
-        <div class="project-info">
-          <h3>Warehouse Truss Modification</h3>
-          <p>Load modification analysis and connection redesign for expanded mechanical equipment loads.</p>
-          <div class="project-meta"><span>Jacksonville, FL</span><span>Truss Engineering</span></div>
+          <img src="projects/jesuit-press-box/photo-1.jpg" alt="Jesuit HS Stadium Press Box" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="structural">
+        <div class="project-info">
+          <h3>Jesuit HS Stadium Press Box</h3>
+          <p>Shoring design for the new stadium press box construction at Jesuit High School Tampa.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-img-academy-stair.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?w=600&q=80&fit=crop" alt="Structural project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Structural</span>
-      </div>
-        <div class="project-info">
-          <h3>School Gymnasium Addition</h3>
-          <p>Structural design for a gymnasium addition connected to an existing K-12 school campus.</p>
-          <div class="project-meta"><span>Sarasota, FL</span><span>Structural Engineering</span></div>
+          <img src="projects/img-academy-stair/photo-1.jpg" alt="IMG Academy Emergency Stair" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-      <div class="project-card" data-category="inspection">
+        <div class="project-info">
+          <h3>IMG Academy Emergency Stair</h3>
+          <p>Emergency stair shoring and structural support engineering at IMG Academy.</p>
+          <div class="project-meta"><span>Bradenton, FL</span><span>Emergency Shoring</span></div>
+        </div>
+      </a>
+      <a href="project-halifax-landing.html" class="project-card" data-category="shoring">
         <div class="project-thumb" style="background:none; overflow:hidden;">
-        <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80&fit=crop" alt="Inspection project" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
-        <span class="project-tag">Inspection</span>
-      </div>
-        <div class="project-info">
-          <h3>Pre-Purchase Inspection</h3>
-          <p>Structural condition report for a commercial property acquisition — delivered within 48 hours.</p>
-          <div class="project-meta"><span>Houston, TX</span><span>Structural Inspection</span></div>
+          <img src="projects/halifax-landing/photo-1.jpg" alt="Halifax Landing Condominium" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
         </div>
-      </div>
-
-    </div>
+        <div class="project-info">
+          <h3>Halifax Landing Condominium</h3>
+          <p>Concrete shoring and formwork engineering for the Halifax Landing condominium tower.</p>
+          <div class="project-meta"><span>Daytona Beach, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-dunedin-tai-chi.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/dunedin-tai-chi/photo-1.jpg" alt="Dunedin Tai Chi Center Wall Bracing" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Dunedin Tai Chi Center Wall Bracing</h3>
+          <p>Wall bracing engineering for facade preservation and reconstruction at the Dunedin Tai Chi Center.</p>
+          <div class="project-meta"><span>Dunedin, FL</span><span>Wall Bracing</span></div>
+        </div>
+      </a>
+      <a href="project-demarcay-wall-bracing.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/demarcay-wall-bracing/photo-1.jpg" alt="DeMarcay Building Wall Bracing" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>DeMarcay Building Wall Bracing</h3>
+          <p>Historic facade wall bracing for the DeMarcay Building redevelopment in downtown Sarasota.</p>
+          <div class="project-meta"><span>Sarasota, FL</span><span>Wall Bracing &amp; Restoration</span></div>
+        </div>
+      </a>
+      <a href="project-clearwater-aquarium-repair.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/clearwater-aquarium-repair/photo-1.jpg" alt="Clearwater Marine Aquarium Repair" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">5 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Clearwater Marine Aquarium Repair</h3>
+          <p>Structural repair and shoring engineering for the Clearwater Marine Aquarium facility.</p>
+          <div class="project-meta"><span>Clearwater, FL</span><span>Structural Repair</span></div>
+        </div>
+      </a>
+      <a href="project-clearwater-aquarium-manatee.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/clearwater-aquarium-manatee/photo-1.jpg" alt="Clearwater Aquarium Manatee Pool" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">3 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Clearwater Aquarium Manatee Pool</h3>
+          <p>Shoring and formwork engineering for the Manatee Pool construction at Clearwater Marine Aquarium.</p>
+          <div class="project-meta"><span>Clearwater, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-chapel-michell-crossing.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/chapel-michell-crossing/photo-1.jpg" alt="The Chapel at Mitchell Crossing" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">9 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>The Chapel at Mitchell Crossing</h3>
+          <p>Concrete shoring and formwork engineering for the chapel at Mitchell Crossing development.</p>
+          <div class="project-meta"><span>Florida</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-tampa-prep-stair.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/tampa-prep-stair/photo-1.jpg" alt="Tampa Prep Stair Shoring" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Tampa Prep Stair Shoring</h3>
+          <p>Shoring engineering for new stair construction at Tampa Preparatory School.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+      <a href="project-valley-bank-column.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/valley-bank-column/photo-1.jpg" alt="Valley National Bank Column Replacement" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span><span class="project-photo-count">3 photos</span>
+        </div>
+        <div class="project-info">
+          <h3>Valley National Bank Column Replacement</h3>
+          <p>Column replacement shoring and structural support engineering for the Valley National Bank building.</p>
+          <div class="project-meta"><span>Florida</span><span>Column Replacement &amp; Shoring</span></div>
+        </div>
+      </a>
+      <a href="project-academy-holy-names.html" class="project-card" data-category="shoring">
+        <div class="project-thumb" style="background:none; overflow:hidden;">
+          <img src="projects/academy-holy-names/photo-1.jpg" alt="Academy of the Holy Names" loading="lazy" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+          <span class="project-tag">Shoring</span>
+        </div>
+        <div class="project-info">
+          <h3>Academy of the Holy Names</h3>
+          <p>Shoring engineering for the Northview building addition at Academy of the Holy Names.</p>
+          <div class="project-meta"><span>Tampa, FL</span><span>Shoring &amp; Formwork</span></div>
+        </div>
+      </a>
+        </div>
   </div>
 
   <div class="cta-band">
@@ -296,6 +384,6 @@
     });
   </script>
 
-  <script src="animations.js?v1778602573"></script>
+  <script src="animations.js?v1777554202983"></script>
 </body>
 </html>
